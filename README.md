@@ -1,42 +1,101 @@
 # 🤖 Telegram Bot Handler (bots.php)
 
-This file is part of a Telegram bot system written in PHP. It acts as a **core handler** for processing updates, managing user interactions, and handling bot logic.
+A lightweight PHP-based **Telegram bot handler** that processes webhook updates, manages user interactions, and routes commands dynamically.
 
 ---
 
 ## 📌 Overview
 
-`bots.php` is responsible for:
+`bots.php` is the **core entry point** for your Telegram bot. It receives updates from Telegram via webhook and handles:
 
-- Receiving Telegram webhook updates
-- Processing user messages & commands
-- Routing logic based on user actions
-- Managing bot responses dynamically
+* Incoming messages
+* Commands (`/start`, etc.)
+* Callback queries (buttons)
+* User state logic
+* Sending responses via Telegram API
+
+---
+
+## 📁 Project Structure
+
+```
+📦 project/
+ ┣ 📜 bots.php                # Main webhook handler (core logic)
+ ┣ 📜 config.php              # Define constants & load config
+ ┣ 📜 .env                    # Secret keys (optional alternative to config.php)
+ ┣ 📜 README.md               # Documentation
+
+ ┣ 📂 data/                   # Main data storage (DATA_FOLDER)
+ ┃ ┣ users.json               # User data & states
+ ┃ ┣ sessions.json            # Session tracking
+ ┃ ┗ debug.log                # Debug logs
+
+ ┣ 📂 database/               # Database storage (DB_FILE)
+ ┃ ┗ database.sqlite         # SQLite database file
+
+ ┣ 📂 games/                  # Game files (FILE_GAME_FOLDER)
+ ┃ ┣ quiz.json
+ ┃ ┗ levels.json
+
+ ┣ 📂 storage/                # Writable files (DATA_WRITE_FOLDER)
+ ┃ ┣ uploads/
+ ┃ ┗ temp/
+
+ ┣ 📂 bakong/                 # Payment integration (BAKONG_TOKEN)
+ ┃ ┣ qr/
+ ┃ ┗ logs/
+
+ ┗ 📂 admin/                  # Admin tools (ADMIN_ID related logic)
+   ┣ dashboard.php
+   ┗ logs.php
+```
 
 ---
 
 ## ⚙️ Features
 
-- 📩 **Webhook Processing**
-  - Handles incoming Telegram updates in real-time
+* 📩 **Webhook Processing**
 
-- 🧠 **Command Handling**
-  - Supports custom commands and interactions
+  * Receives real-time updates from Telegram
 
-- 🔄 **State-Based Logic**
-  - Responds differently depending on user state
+* 🧠 **Command Handling**
 
-- 🔐 **Secure Handling**
-  - Works with environment variables for sensitive data
+  * Easily handle commands like `/start`, `/help`
 
-- ⚡ **Lightweight & Fast**
-  - Pure PHP implementation, no heavy frameworks
+* 🔄 **State Management**
+
+  * Track user progress and actions
+
+* 💬 **Dynamic Responses**
+
+  * Reply based on user input or state
+
+* 🔐 **Secure Setup**
+
+  * Uses `.env` for sensitive data
+
+* ⚡ **Lightweight**
+
+  * No framework required, pure PHP
 
 ---
 
-## 📁 Usage
+## 🚀 Setup Guide
 
-This file should be connected to your Telegram bot via webhook:
+### 1. Configure `.env`
+
+Create a `.env` file:
+
+```
+TELEGRAM_BOT_TOKEN=your_bot_token
+WEBHOOK_URL=https://yourdomain.com/bots.php
+```
+
+---
+
+### 2. Set Webhook
+
+Open in browser:
 
 ```
 https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook?url=https://yourdomain.com/bots.php
@@ -44,46 +103,58 @@ https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook?url=https://yourdomain.c
 
 ---
 
-## 🔧 Requirements
+### 3. Server Requirements
 
-- PHP 7.2+
-- cURL enabled
-- HTTPS enabled server
+* PHP 7.2+
+* cURL enabled
+* HTTPS required (Telegram webhook)
 
 ---
 
-## 📂 Integration
+## 🔄 How It Works
 
-Typically used alongside:
+1. User sends message to bot
+2. Telegram sends update → `bots.php`
+3. Script reads input (`php://input`)
+4. Parses:
 
-- `config.php` → Configuration
-- `.env` → Secrets & API keys
-- `data/` → JSON storage or logs
+   * message
+   * command
+   * callback query
+5. Processes logic
+6. Sends response via Telegram API
 
 ---
 
 ## 🧪 Debugging
 
-To debug issues:
+Logs are stored in:
 
-- Enable logging inside the script
-- Check server logs
-- Validate incoming Telegram payloads
+```
+/data/debug.log
+```
+
+You can log incoming data for debugging:
+
+```php
+file_put_contents('data/debug.log', file_get_contents('php://input'), FILE_APPEND);
+```
 
 ---
 
 ## 🛡️ Security Tips
 
-- Never expose bot token publicly
-- Validate incoming requests
-- Restrict file access if needed
+* ❌ Never upload `.env` to GitHub
+* 🔒 Protect `/data/` with `.htaccess`
+* ✅ Validate incoming webhook requests
 
 ---
 
 ## 📌 Notes
 
-- Designed for webhook usage (not polling)
-- Works well on shared hosting (cPanel)
+* Designed for **webhook mode** (not polling)
+* Works on **cPanel / shared hosting**
+* Easy to expand with more features
 
 ---
 
