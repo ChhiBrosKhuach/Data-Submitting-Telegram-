@@ -2,19 +2,19 @@
 // =============================================================================
 // DIAMOND DEPOSIT BOT - COMPLETE PHP VERSION
 // Based on original Python mains.py
-// Webhook: https://khmerservice.online/home/broskhuach07/bots.php
+// Webhook: 
 // =============================================================================
 
 // =============================================================================
 // CONFIGURATION
 // =============================================================================
-define('BOT_TOKEN', '7202492608:AAFC43e9YrjbDg3hklFXqKcbOt0FEtrIqeQ');
-define('ADMIN_ID', 1693499963);
-define('DB_FILE', '/home/eklcpzrqle/home/broskhuach07/data.db');
-define('DATA_FOLDER', '/home/eklcpzrqle/home/broskhuach07/DataTxtFloder/');
-define('FILE_GAME_FOLDER', '/home/eklcpzrqle/home/broskhuach07/FileGame/');
-define('DATA_WRITE_FOLDER', '/home/eklcpzrqle/home/broskhuach07/DataWrite/');
-define('BAKONG_TOKEN', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MTkzMTYwMjMsImlhdCI6MTcxMTI4MDgyMywiZGF0YSI6eyJpZCI6ImVhNGI5NDFjYzI4NzRiNiJ9fQ.qgGYwffpi8MAHPd_PvOIa35tHYMHhXptTjrEVkJS6fo');
+define('BOT_TOKEN', '');
+define('ADMIN_ID', );
+define('DB_FILE', '');
+define('DATA_FOLDER', '');
+define('FILE_GAME_FOLDER', '');
+define('DATA_WRITE_FOLDER', '');
+define('BAKONG_TOKEN', '');
 
 // =============================================================================
 // INITIALIZATION
